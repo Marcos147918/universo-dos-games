@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja — Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina-larga">
+
+  <h1 class="page-title">Loja de Packs</h1>
+  <p class="page-sub">Escolha o console e garanta seu pack completo agora.</p>
+
+  <div class="loja-grid">
+    {% for p in produtos %}
+    <div class="produto-card">
+
+      <div class="produto-card-topo" style="background: {{ p.cor }}22;">
+        <img src="{{ url_for('static', filename='imagens/foto.jpeg') }}" alt="{{ p.console }}">
+        <span class="console-tag">{{ p.tag }}</span>
+        <span class="produto-card-badge">{{ p.itens }}</span>
+      </div>
+
+      <div class="produto-card-corpo">
+        <h3>{{ p.console }}</h3>
+        <p>{{ p.descricao }}</p>
+        <div class="produto-info-lista">
+          <span class="produto-chip">{{ p.formato }}</span>
+          <span class="produto-chip">{{ p.itens }}</span>
+        </div>
+        <div class="produto-card-footer">
+          <div class="produto-preco">
+            R$ {{ "%.2f"|format(p.preco) }}
+            <span>/ acesso vitalício</span>
+          </div>
+          <a href="/checkout/{{ p.id }}" class="btn btn-primario" style="font-size:13px; padding: 9px 16px;">
+            Comprar
+          </a>
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+</main>
+</body>
+</html>

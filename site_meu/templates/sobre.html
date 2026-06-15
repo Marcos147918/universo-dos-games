@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre — Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <div class="sobre-hero">
+    <h1>Sobre o <span>Universo dos Games</span></h1>
+    <p>
+      Somos apaixonados por games retrô e criamos este espaço para quem quer 
+      reviver clássicos de várias gerações sem dificuldade. Cada pack é cuidadosamente 
+      organizado com os melhores títulos, prontos para uso.
+    </p>
+  </div>
+
+  <div class="sobre-grid">
+    <div class="sobre-item">
+      <h3>🎮 Nossa Missão</h3>
+      <p>Preservar e facilitar o acesso a jogos clássicos de consoles históricos, organizados e prontos para usar.</p>
+    </div>
+    <div class="sobre-item">
+      <h3>📦 Nossos Packs</h3>
+      <p>Cada pack é uma coleção selecionada dos melhores jogos do console, nos formatos corretos para emuladores e consoles desbloqueados.</p>
+    </div>
+    <div class="sobre-item">
+      <h3>⚡ Entrega Imediata</h3>
+      <p>Após o pagamento via PIX, o link do Google Drive é liberado automaticamente na tela, sem espera.</p>
+    </div>
+    <div class="sobre-item">
+      <h3>🔒 Segurança</h3>
+      <p>Seus dados são protegidos. O pagamento é processado de forma criptografada e o acesso é vitalício.</p>
+    </div>
+  </div>
+
+  <div class="checkout-bloco" style="text-align:center;">
+    <div style="font-size: 32px; margin-bottom: 12px;">🕹️</div>
+    <h3 style="font-family:'Rajdhani',sans-serif; font-size:20px; margin-bottom:8px; color:#fff;">
+      Pronto para começar?
+    </h3>
+    <p style="color:var(--muted); font-size:14px; margin-bottom:18px;">
+      Acesse a loja e escolha o pack do seu console favorito.
+    </p>
+    <a href="/loja" class="btn btn-primario">Ver Loja de Packs</a>
+  </div>
+
+</main>
+</body>
+</html>

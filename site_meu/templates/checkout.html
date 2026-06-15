@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — {{ produto.console }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <h1 class="page-title">Checkout Seguro 🔒</h1>
+  <p class="page-sub">Revise seu pedido e finalize o pagamento via PIX.</p>
+
+  <form method="POST">
+
+    <!-- RESUMO DO PEDIDO -->
+    <div class="checkout-bloco">
+      <h3>🎮 Resumo do Pedido</h3>
+      <div class="resumo-produto">
+        <img src="{{ url_for('static', filename='imagens/foto.jpeg') }}" alt="{{ produto.console }}">
+        <div>
+          <div class="resumo-produto-nome">Pack {{ produto.console }}</div>
+          <div class="resumo-produto-preco">R$ {{ "%.2f"|format(produto.preco) }}</div>
+          <div style="font-size:12px; color: var(--muted); margin-top:3px;">{{ produto.itens }} • {{ produto.formato }}</div>
+        </div>
+      </div>
+      <div class="linha-valor"><span>Subtotal</span><span>R$ {{ "%.2f"|format(produto.preco) }}</span></div>
+      <div class="linha-valor"><span>Taxa de serviço</span><span>R$ 0,99</span></div>
+      <div class="linha-valor linha-total">
+        <strong>Total</strong>
+        <span>R$ {{ "%.2f"|format(produto.preco + 0.99) }}</span>
+      </div>
+    </div>
+
+    <!-- DADOS DO COMPRADOR -->
+    <div class="checkout-bloco">
+      <h3>👤 Seus Dados</h3>
+      <div class="campo">
+        <label>CPF ou CNPJ (obrigatório)</label>
+        <input type="text" name="cpf" placeholder="000.000.000-00" required
+               oninput="mascaraCPF(this)">
+      </div>
+      <div class="telefone-row">
+        <div class="campo">
+          <label>País</label>
+          <select name="codigo_pais">
+            <option value="+55">🇧🇷 +55</option>
+          </select>
+        </div>
+        <div class="campo" style="flex:1">
+          <label>Celular / WhatsApp</label>
+          <input type="text" name="numero" placeholder="(00) 00000-0000" required
+                 oninput="mascaraTel(this)">
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGAMENTO -->
+    <div class="checkout-bloco">
+      <h3>💳 Pagamento</h3>
+      <div class="pix-box">
+        💠 PIX — Liberação imediata do link após confirmação
+      </div>
+      <button type="submit" class="btn btn-verde btn-bloco" style="font-size:16px; padding:15px;">
+        ✅ Pagar R$ {{ "%.2f"|format(produto.preco + 0.99) }} com PIX
+      </button>
+      <p style="text-align:center; font-size:12px; color:var(--muted); margin-top:12px;">
+        🛡️ Pagamento criptografado e 100% seguro
+      </p>
+    </div>
+
+  </form>
+</main>
+
+<script>
+function mascaraCPF(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  v = v.replace(/(\d{3})(\d)/,'$1.$2');
+  v = v.replace(/(\d{3})(\d)/,'$1.$2');
+  v = v.replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  el.value = v;
+}
+function mascaraTel(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if(v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  else if(v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)/,'($1) $2-$3');
+  else if(v.length > 2) v = v.replace(/^(\d{2})(\d*)/,'($1) $2');
+  el.value = v;
+}
+</script>
+</body>
+</html>

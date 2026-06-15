@@ -1,0 +1,441 @@
+/* ═══════════════════════════════════════════════
+   UNIVERSO DOS GAMES — estilo.css
+   Paleta: #0a0a0f (fundo) | #12121a (card)
+           #1e1e2e (borda)  | #ff6b00 (laranja/acento)
+           #ffffff (texto)  | #888 (texto secundário)
+   Tipografia: 'Rajdhani' display | 'Inter' corpo
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0a0a0f;
+  --card:     #12121a;
+  --borda:    #1e1e2e;
+  --acento:   #ff6b00;
+  --acento2:  #ff8c00;
+  --texto:    #f0f0f0;
+  --muted:    #888;
+  --success:  #00c97a;
+  --radius:   14px;
+  --header-h: 62px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--texto);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ── HEADER ───────────────────────────────────── */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  height: var(--header-h);
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+  z-index: 200;
+  display: flex; align-items: center;
+  padding: 0 24px; gap: 16px;
+}
+
+.header-logo {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px; font-weight: 700;
+  letter-spacing: 1px; color: #fff;
+  flex: 1;
+}
+.header-logo span { color: var(--acento); }
+
+.header-nav { display: flex; gap: 6px; }
+.header-nav a {
+  padding: 7px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+  transition: color .2s, background .2s;
+}
+.header-nav a:hover, .header-nav a.ativo { color: #fff; background: var(--borda); }
+
+.btn-hamburguer {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 6px;
+}
+.btn-hamburguer span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px; transition: .3s;
+}
+
+/* ── MENU LATERAL (mobile) ────────────────────── */
+.menu-lateral {
+  position: fixed; top: 0; left: -280px; width: 260px; height: 100%;
+  background: var(--card); border-right: 1px solid var(--borda);
+  z-index: 300; padding: 24px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: left .3s cubic-bezier(.4,0,.2,1);
+}
+.menu-lateral.aberto { left: 0; }
+.menu-lateral .logo-menu {
+  font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+  color: #fff; margin-bottom: 20px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--borda);
+}
+.menu-lateral .logo-menu span { color: var(--acento); }
+.menu-lateral a {
+  padding: 12px 14px; border-radius: 10px;
+  font-size: 15px; color: var(--muted);
+  display: flex; align-items: center; gap: 10px;
+  transition: color .2s, background .2s;
+}
+.menu-lateral a:hover { color: #fff; background: var(--borda); }
+.menu-lateral a.sair { color: #ff4d4d; margin-top: auto; }
+.overlay-menu {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.6); z-index: 250;
+}
+.overlay-menu.ativo { display: block; }
+.btn-fechar-menu {
+  position: absolute; top: 18px; right: 18px;
+  font-size: 22px; cursor: pointer; color: var(--muted);
+}
+
+/* ── CONTAINER PRINCIPAL ──────────────────────── */
+.pagina {
+  max-width: 680px; margin: 0 auto;
+  padding: calc(var(--header-h) + 32px) 20px 80px;
+}
+.pagina-larga {
+  max-width: 960px; margin: 0 auto;
+  padding: calc(var(--header-h) + 32px) 20px 80px;
+}
+
+/* ── HERO DA INDEX ────────────────────────────── */
+.hero {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+}
+.hero img { width: 100%; display: block; border-radius: var(--radius); }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,15,.95) 0%, rgba(10,10,15,.3) 60%, transparent 100%);
+  border-radius: var(--radius);
+}
+.hero-texto {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 24px;
+}
+.hero-texto h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(26px, 5vw, 40px); font-weight: 700;
+  line-height: 1.1; color: #fff;
+}
+.hero-texto h1 span { color: var(--acento); }
+.hero-texto p {
+  margin-top: 8px; font-size: 14px; color: #bbb; line-height: 1.5;
+}
+
+/* ── FLASH MESSAGES ───────────────────────────── */
+.flash { 
+  padding: 12px 16px; border-radius: 10px; font-size: 14px;
+  margin-bottom: 20px; border: 1px solid;
+}
+.flash.erro { background: rgba(255,60,60,.1); border-color: #ff3c3c; color: #ff6b6b; }
+.flash.ok   { background: rgba(0,201,122,.1); border-color: var(--success); color: var(--success); }
+
+/* ── CARDS DE AUTENTICAÇÃO ────────────────────── */
+.auth-card {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 28px 24px;
+  margin-bottom: 20px;
+}
+.auth-card h2 {
+  font-family: 'Rajdhani', sans-serif; font-size: 22px;
+  font-weight: 700; margin-bottom: 20px; color: #fff;
+}
+.auth-tabs { display: flex; gap: 4px; margin-bottom: 24px; }
+.auth-tab {
+  flex: 1; padding: 9px; text-align: center; border-radius: 8px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--borda); color: var(--muted);
+  transition: .2s; background: transparent;
+}
+.auth-tab.ativo { background: var(--acento); border-color: var(--acento); color: #fff; }
+
+/* ── INPUTS ───────────────────────────────────── */
+.campo { margin-bottom: 14px; }
+.campo label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+.campo input, .campo select, .campo textarea {
+  width: 100%; padding: 13px 14px;
+  background: #0f0f17; border: 1px solid var(--borda);
+  border-radius: 10px; color: #fff; font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  transition: border-color .2s;
+  outline: none;
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  border-color: var(--acento);
+}
+.campo input::placeholder { color: #444; }
+.campo textarea { resize: vertical; min-height: 110px; }
+
+/* ── BOTÕES ───────────────────────────────────── */
+.btn {
+  display: inline-block; padding: 13px 22px; border-radius: 10px;
+  font-weight: 600; font-size: 15px; cursor: pointer;
+  border: none; transition: .2s; text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+.btn-bloco { width: 100%; display: block; }
+.btn-primario { background: var(--acento); color: #fff; }
+.btn-primario:hover { background: var(--acento2); }
+.btn-outline { background: transparent; border: 1px solid var(--borda); color: var(--texto); }
+.btn-outline:hover { border-color: var(--acento); color: var(--acento); }
+.btn-verde { background: var(--success); color: #000; }
+.btn-verde:hover { background: #00b36b; }
+
+/* ── BENEFÍCIOS (index) ───────────────────────── */
+.beneficios-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 28px;
+}
+.beneficio-item {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 16px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.beneficio-icone { font-size: 22px; line-height: 1; flex-shrink: 0; }
+.beneficio-item p { font-size: 13px; color: var(--muted); line-height: 1.4; margin-top: 4px; }
+.beneficio-item strong { font-size: 14px; color: #fff; }
+
+/* ── LOJA GRID ────────────────────────────────── */
+.loja-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.produto-card {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: border-color .25s, transform .25s;
+  position: relative;
+}
+.produto-card:hover { border-color: var(--acento); transform: translateY(-3px); }
+
+.produto-card-topo {
+  height: 140px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.produto-card-topo img {
+  width: 100%; height: 100%; object-fit: cover; opacity: .45;
+}
+.produto-card-topo .console-tag {
+  position: absolute;
+  font-family: 'Rajdhani', sans-serif; font-size: 36px; font-weight: 700;
+  color: rgba(255,255,255,.9); letter-spacing: 2px;
+  text-shadow: 0 2px 20px rgba(0,0,0,.8);
+}
+.produto-card-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--acento); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 3px 8px;
+  border-radius: 6px;
+}
+.produto-card-corpo { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.produto-card-corpo h3 {
+  font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+  color: #fff; margin-bottom: 6px;
+}
+.produto-card-corpo p {
+  font-size: 13px; color: var(--muted); line-height: 1.5; flex: 1;
+}
+.produto-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--borda);
+}
+.produto-preco {
+  font-family: 'Rajdhani', sans-serif; font-size: 24px; font-weight: 700;
+  color: var(--acento);
+}
+.produto-preco span { font-size: 13px; font-weight: 400; color: var(--muted); }
+.produto-info-lista {
+  display: flex; gap: 8px; margin: 10px 0;
+}
+.produto-chip {
+  background: var(--borda); border-radius: 6px;
+  font-size: 11px; color: var(--muted); padding: 3px 8px;
+  font-weight: 500;
+}
+
+/* ── CHECKOUT ─────────────────────────────────── */
+.checkout-bloco {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 22px 20px; margin-bottom: 18px;
+}
+.checkout-bloco h3 {
+  font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+  color: #fff; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.resumo-produto {
+  display: flex; gap: 14px; align-items: center;
+  background: #0f0f17; border-radius: 10px; padding: 14px;
+  margin-bottom: 16px;
+}
+.resumo-produto img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+.resumo-produto-nome { font-size: 14px; font-weight: 600; color: #fff; }
+.resumo-produto-preco { font-size: 14px; color: var(--acento); font-weight: 700; margin-top: 4px; }
+.linha-valor { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); padding: 5px 0; }
+.linha-total { border-top: 1px dashed var(--borda); margin-top: 10px; padding-top: 12px; }
+.linha-total span { font-size: 17px; font-weight: 700; color: var(--success); }
+.pix-box {
+  background: rgba(0,201,122,.08); border: 1px solid var(--success);
+  border-radius: 10px; padding: 14px 16px; text-align: center;
+  font-size: 14px; font-weight: 600; color: var(--success);
+  margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.telefone-row { display: flex; gap: 10px; }
+.telefone-row .campo:first-child { flex: 0 0 90px; }
+
+/* ── CONFIRMAÇÃO ──────────────────────────────── */
+.confirmacao-hero {
+  text-align: center; padding: 40px 0 30px;
+}
+.confirmacao-icone { font-size: 56px; margin-bottom: 14px; display: block; }
+.confirmacao-hero h2 {
+  font-family: 'Rajdhani', sans-serif; font-size: 28px; font-weight: 700;
+  color: var(--success); margin-bottom: 8px;
+}
+.confirmacao-hero p { font-size: 14px; color: var(--muted); }
+.drive-box {
+  background: rgba(0,201,122,.08); border: 2px solid var(--success);
+  border-radius: var(--radius); padding: 20px;
+  text-align: center; margin: 20px 0;
+}
+.drive-box p { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.drive-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--success); color: #000; font-weight: 700;
+  padding: 13px 24px; border-radius: 10px; font-size: 15px;
+  transition: .2s;
+}
+.drive-link:hover { background: #00b36b; }
+
+/* ── ÁREA DO CLIENTE ──────────────────────────── */
+.cliente-header {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 22px 20px;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+}
+.cliente-avatar {
+  width: 56px; height: 56px; background: var(--acento);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700;
+  color: #fff; flex-shrink: 0;
+}
+.cliente-nome { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700; }
+.cliente-email { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.secao-titulo {
+  font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+  color: #fff; margin-bottom: 14px;
+}
+.compra-card {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 16px;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 12px;
+  transition: border-color .2s;
+}
+.compra-card:hover { border-color: var(--acento); }
+.compra-tag {
+  width: 52px; height: 52px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+  color: #fff;
+}
+.compra-info { flex: 1; }
+.compra-nome { font-size: 14px; font-weight: 600; color: #fff; }
+.compra-data { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.compra-valor { font-family: 'Rajdhani', sans-serif; font-size: 18px; color: var(--acento); font-weight: 700; }
+.empty-state {
+  text-align: center; padding: 50px 20px;
+  color: var(--muted); font-size: 14px;
+}
+.empty-state .ei { font-size: 40px; display: block; margin-bottom: 12px; }
+
+/* ── SOBRE ────────────────────────────────────── */
+.sobre-hero {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 32px 24px; margin-bottom: 20px;
+  text-align: center;
+}
+.sobre-hero h1 {
+  font-family: 'Rajdhani', sans-serif; font-size: 30px; font-weight: 700;
+  color: #fff;
+}
+.sobre-hero h1 span { color: var(--acento); }
+.sobre-hero p { color: var(--muted); line-height: 1.7; margin-top: 12px; font-size: 15px; }
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.sobre-item {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 20px;
+}
+.sobre-item h3 { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.sobre-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── CONTATO ──────────────────────────────────── */
+.contato-card {
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--radius); padding: 28px 24px;
+}
+.contato-card h2 {
+  font-family: 'Rajdhani', sans-serif; font-size: 24px; font-weight: 700;
+  margin-bottom: 6px;
+}
+.contato-card > p { font-size: 14px; color: var(--muted); margin-bottom: 22px; }
+.contato-info { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.contato-info-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--muted);
+}
+.contato-info-item .ci { font-size: 20px; }
+.sucesso-msg {
+  text-align: center; padding: 40px 20px;
+  background: rgba(0,201,122,.07); border: 1px solid var(--success);
+  border-radius: var(--radius);
+}
+.sucesso-msg h3 { font-family: 'Rajdhani', sans-serif; font-size: 22px; color: var(--success); margin-top: 10px; }
+.sucesso-msg p { font-size: 14px; color: var(--muted); margin-top: 6px; }
+
+/* ── SEPARADORES E MISC ───────────────────────── */
+.divider { border: none; border-top: 1px solid var(--borda); margin: 24px 0; }
+.page-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700;
+  color: #fff; margin-bottom: 6px;
+}
+.page-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+.badge-novo {
+  background: var(--acento); color: #fff; font-size: 10px;
+  font-weight: 700; padding: 2px 7px; border-radius: 5px; vertical-align: middle;
+}
+
+/* ── RESPONSIVO ───────────────────────────────── */
+@media (max-width: 640px) {
+  .header-nav { display: none; }
+  .btn-hamburguer { display: flex; }
+  .beneficios-grid { grid-template-columns: 1fr; }
+  .sobre-grid { grid-template-columns: 1fr; }
+  .loja-grid { grid-template-columns: 1fr; }
+  .telefone-row { flex-direction: column; }
+  .telefone-row .campo:first-child { flex: auto; }
+  .compra-valor { display: none; }
+}

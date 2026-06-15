@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Confirmado — Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <div class="confirmacao-hero">
+    <span class="confirmacao-icone">✅</span>
+    <h2>PIX Confirmado!</h2>
+    <p>Seu pagamento foi processado com sucesso. Acesse o link abaixo.</p>
+  </div>
+
+  <!-- LINK DO DRIVE -->
+  <div class="drive-box">
+    <p>📁 Seu link exclusivo do Google Drive — <strong>{{ compra.produto_nome }}</strong></p>
+    <a href="{{ compra.link_drive }}" target="_blank" class="drive-link">
+      📂 Acessar Minha Pasta no Drive
+    </a>
+  </div>
+
+  <!-- DETALHES DA COMPRA -->
+  <div class="checkout-bloco">
+    <h3>📋 Detalhes da Compra</h3>
+    <div class="linha-valor"><span>Produto</span><span>Pack {{ compra.produto_nome }}</span></div>
+    <div class="linha-valor"><span>Valor pago</span><span style="color:var(--success)">R$ {{ "%.2f"|format(compra.valor) }}</span></div>
+    <div class="linha-valor"><span>Data</span><span>{{ compra.data.strftime('%d/%m/%Y às %H:%M') }}</span></div>
+    <div class="linha-valor"><span>E-mail</span><span>{{ session.get('email', '') }}</span></div>
+  </div>
+
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <a href="/loja" class="btn btn-outline" style="flex:1; text-align:center;">← Voltar à Loja</a>
+    <a href="/area-cliente" class="btn btn-primario" style="flex:1; text-align:center;">Ver Minhas Compras</a>
+  </div>
+
+</main>
+</body>
+</html>

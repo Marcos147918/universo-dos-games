@@ -1,0 +1,43 @@
+<header class="header">
+  <a href="/" class="header-logo">UNIVERSO <span>DOS GAMES</span></a>
+
+  <nav class="header-nav">
+    <a href="/" {% if request.endpoint == 'index' %}class="ativo"{% endif %}>Início</a>
+    <a href="/loja" {% if request.endpoint == 'loja' %}class="ativo"{% endif %}>Loja</a>
+    <a href="/sobre" {% if request.endpoint == 'sobre' %}class="ativo"{% endif %}>Sobre</a>
+    <a href="/contato" {% if request.endpoint == 'contato' %}class="ativo"{% endif %}>Contato</a>
+    {% if logado %}
+    <a href="/area-cliente" {% if request.endpoint == 'area_cliente' %}class="ativo"{% endif %}>Minha Área</a>
+    <a href="/sair" style="color:#ff4d4d;">Sair</a>
+    {% endif %}
+  </nav>
+
+  <div class="btn-hamburguer" onclick="abrirMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<div class="overlay-menu" id="overlayMenu" onclick="fecharMenu()"></div>
+<nav class="menu-lateral" id="menuLateral">
+  <span class="btn-fechar-menu" onclick="fecharMenu()">✕</span>
+  <div class="logo-menu">UNIVERSO <span>DOS GAMES</span></div>
+  <a href="/">🏠 Início</a>
+  <a href="/loja">🛒 Loja de Packs</a>
+  <a href="/sobre">ℹ️ Sobre</a>
+  <a href="/contato">✉️ Contato</a>
+  {% if logado %}
+  <a href="/area-cliente">👤 Minha Área</a>
+  <a href="/sair" class="sair">🚪 Sair</a>
+  {% endif %}
+</nav>
+
+<script>
+function abrirMenu() {
+  document.getElementById('menuLateral').classList.add('aberto');
+  document.getElementById('overlayMenu').classList.add('ativo');
+}
+function fecharMenu() {
+  document.getElementById('menuLateral').classList.remove('aberto');
+  document.getElementById('overlayMenu').classList.remove('ativo');
+}
+</script>
