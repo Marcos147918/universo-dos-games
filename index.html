@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="{{ url_for('static', filename='imagens/foto.jpeg') }}" alt="Universo dos Games">
+    <div class="hero-overlay"></div>
+    <div class="hero-texto">
+      <h1>Jogos de <span>várias gerações</span><br>em um só lugar</h1>
+      <p>Packs completos para PS2, PS3, Xbox 360, Nintendo e muito mais.</p>
+    </div>
+  </div>
+
+  <!-- FLASH -->
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in msgs %}
+      <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  {% endwith %}
+
+  <!-- BOAS VINDAS SE LOGADO -->
+  {% if logado %}
+  <div class="auth-card" style="border-color: var(--acento); background: rgba(255,107,0,.06);">
+    <h2 style="color: var(--acento);">🎮 Bem-vindo de volta, {{ session.get('nome') }}!</h2>
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Acesse a loja para ver todos os packs disponíveis.</p>
+    <a href="/loja" class="btn btn-primario">Ver Loja de Packs →</a>
+  </div>
+  {% endif %}
+
+  <!-- BENEFÍCIOS -->
+  <div class="beneficios-grid">
+    <div class="beneficio-item">
+      <div class="beneficio-icone">⚡</div>
+      <div>
+        <strong>Acesso Imediato</strong>
+        <p>Link do Google Drive liberado na hora após o pagamento</p>
+      </div>
+    </div>
+    <div class="beneficio-item">
+      <div class="beneficio-icone">📁</div>
+      <div>
+        <strong>Packs Organizados</strong>
+        <p>Arquivos prontos para usar, separados por console</p>
+      </div>
+    </div>
+    <div class="beneficio-item">
+      <div class="beneficio-icone">🎮</div>
+      <div>
+        <strong>8 Consoles</strong>
+        <p>PS2, PS3, PSP, Xbox 360, Wii, Wii U, GameCube e DS</p>
+      </div>
+    </div>
+    <div class="beneficio-item">
+      <div class="beneficio-icone">🔒</div>
+      <div>
+        <strong>Pagamento Seguro</strong>
+        <p>PIX com confirmação automática e criptografada</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULÁRIOS LOGIN/CADASTRO -->
+  {% if not logado %}
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab ativo" id="tab-cadastro" onclick="mudarTab('cadastro')">Criar Conta Grátis</button>
+      <button class="auth-tab" id="tab-login" onclick="mudarTab('login')">Já tenho conta</button>
+    </div>
+
+    <!-- CADASTRO -->
+    <div id="form-cadastro">
+      <form method="POST">
+        <input type="hidden" name="acao" value="cadastro">
+        <div class="campo">
+          <label>Nome completo</label>
+          <input type="text" name="nome" placeholder="Seu nome" required>
+        </div>
+        <div class="campo">
+          <label>E-mail</label>
+          <input type="email" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="campo">
+          <label>Senha</label>
+          <input type="password" name="senha" placeholder="Crie uma senha" required>
+        </div>
+        <button type="submit" class="btn btn-primario btn-bloco">Criar Minha Conta</button>
+      </form>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="form-login" style="display:none;">
+      <form method="POST">
+        <input type="hidden" name="acao" value="login">
+        <div class="campo">
+          <label>E-mail</label>
+          <input type="email" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="campo">
+          <label>Senha</label>
+          <input type="password" name="senha" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="btn btn-primario btn-bloco">Entrar na Minha Conta</button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+</main>
+
+<script>
+function mudarTab(tab) {
+  document.getElementById('form-cadastro').style.display = tab === 'cadastro' ? 'block' : 'none';
+  document.getElementById('form-login').style.display    = tab === 'login'    ? 'block' : 'none';
+  document.getElementById('tab-cadastro').classList.toggle('ativo', tab === 'cadastro');
+  document.getElementById('tab-login').classList.toggle('ativo', tab === 'login');
+}
+</script>
+</body>
+</html>

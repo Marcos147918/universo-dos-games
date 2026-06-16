@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <h1 class="page-title">Contato</h1>
+  <p class="page-sub">Dúvidas? Fale com a gente.</p>
+
+  {% if enviado %}
+  <div class="sucesso-msg">
+    <span style="font-size:36px;">✅</span>
+    <h3>Mensagem Enviada!</h3>
+    <p>Responderemos em breve pelo e-mail ou WhatsApp informado.</p>
+    <a href="/" class="btn btn-primario" style="margin-top:16px; display:inline-block;">Voltar ao Início</a>
+  </div>
+  {% else %}
+
+  <div class="contato-card">
+    <h2>Enviar Mensagem</h2>
+    <p>Preencha o formulário e entraremos em contato em até 24h.</p>
+
+    <form method="POST">
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="nome" placeholder="Seu nome" required>
+      </div>
+      <div class="campo">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="seu@email.com" required>
+      </div>
+      <div class="campo">
+        <label>Mensagem</label>
+        <textarea name="mensagem" placeholder="Descreva sua dúvida ou problema..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloco">Enviar Mensagem</button>
+    </form>
+
+    <div class="contato-info">
+      <div class="contato-info-item">
+        <span class="ci">📱</span>
+        <span>WhatsApp: disponível via formulário</span>
+      </div>
+      <div class="contato-info-item">
+        <span class="ci">⏰</span>
+        <span>Atendimento: segunda a sábado, 9h às 21h</span>
+      </div>
+      <div class="contato-info-item">
+        <span class="ci">⚡</span>
+        <span>Resposta em até 24 horas</span>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</main>
+</body>
+</html>

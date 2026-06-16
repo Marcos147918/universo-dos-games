@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Área — Universo dos Games</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+{% include 'componentes/menu.html' %}
+
+<main class="pagina">
+
+  <!-- PERFIL -->
+  <div class="cliente-header">
+    <div class="cliente-avatar">{{ usuario.nome[0].upper() }}</div>
+    <div>
+      <div class="cliente-nome">{{ usuario.nome }}</div>
+      <div class="cliente-email">{{ usuario.email }}</div>
+    </div>
+  </div>
+
+  <!-- HISTÓRICO DE COMPRAS -->
+  <div class="secao-titulo">Minhas Compras</div>
+
+  {% if compras %}
+    {% for compra, produto in compras %}
+    <a href="{{ compra.link_drive }}" target="_blank" class="compra-card" style="text-decoration:none;">
+      <div class="compra-tag" style="background: {{ produto.cor if produto else '#333' }}33; color: {{ produto.cor if produto else '#fff' }};">
+        {{ produto.tag if produto else '?' }}
+      </div>
+      <div class="compra-info">
+        <div class="compra-nome">Pack {{ compra.produto_nome }}</div>
+        <div class="compra-data">{{ compra.data.strftime('%d/%m/%Y às %H:%M') }} • Clique para acessar o Drive</div>
+      </div>
+      <div class="compra-valor">R$ {{ "%.2f"|format(compra.valor) }}</div>
+    </a>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state">
+      <span class="ei">🎮</span>
+      Você ainda não fez nenhuma compra.
+      <br><br>
+      <a href="/loja" class="btn btn-primario">Ver Packs Disponíveis</a>
+    </div>
+  {% endif %}
+
+</main>
+</body>
+</html>
